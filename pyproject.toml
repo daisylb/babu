@@ -5,8 +5,11 @@ description = "A static site generator for Python"
 authors = ["Leigh Brenecki <leigh@brenecki.id.au>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 sqlalchemy = "^1.3"
+"ruamel.yaml" = "^0.16.7"
+lark-parser = "^0.8.1"
+attrs = "^19.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.3"

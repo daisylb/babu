@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String
-from babu.db import Base
+from babu.db import Model
 
-class Page(Base):
+class Page(Model):
     title = Column(String)
     content = Column(String)
