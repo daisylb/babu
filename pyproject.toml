@@ -5,12 +5,16 @@ description = "A static site generator for Python"
 authors = ["Leigh Brenecki <leigh@brenecki.id.au>"]
 license = "MPL-2.0"
 
+[tool.poetry.scripts]
+babu = 'babu._internal.app:cli'
+
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8"
 sqlalchemy = "^1.3"
 "ruamel.yaml" = "^0.16.7"
 lark-parser = "^0.8.1"
 attrs = "^19.3.0"
+click = "^7.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.3"
@@ -18,3 +22,6 @@ pytest = "^5.3"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.black]
+target-version = ['py38']

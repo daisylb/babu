@@ -1,6 +1,5 @@
 import typing as t
 from sqlalchemy import func
-from sqlalchemy.orm import aliased
 from sqlalchemy.orm.query import Query
 from sqlalchemy.orm.session import Session
 from .response import Response
@@ -26,9 +25,10 @@ class NestingRouter:
             return None
         child_url = url[len(self.prefix) :]
         for child in self.children:
-            output = child.resolve(self, session, child_url)
+            output = child.resolve(session, child_url)
             if output is not None:
                 return output
+        return None
 
     def get_all(self, session) -> t.Iterable[t.Tuple[str, Response]]:
         for child in self.children:
@@ -40,7 +40,9 @@ class NestingRouter:
 
 
 class DatabaseRouter:
-    def __init__(self, format_string, query: Query, callable: t.Callable[..., Response]):
+    def __init__(
+        self, format_string, query: Query, callable: t.Callable[..., Response]
+    ):
         self.format_string = format_string
         self.query = query
         self.callable = callable
@@ -58,12 +60,11 @@ class DatabaseRouter:
             .one_or_none()
         )
         if result is None:
-            return
+            return None
         return self.callable(*result[:-1])
 
     def get_all(self, session) -> t.Iterable[t.Tuple[str, Response]]:
         for *params, url in self.annotated_query.with_session(session):
-            print(params, url)
             yield url, self.callable(*params)
 
 
