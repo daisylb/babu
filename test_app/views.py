@@ -1,13 +1,13 @@
-from babu.routing import NestingRouter, DatabaseRouter, query
+from babu.routing import Router, DatabaseRoute, query
 from . import models
 from babu.response import Response
 
-app = NestingRouter()
+app = Router()
 
 
 def foo(id):
     return Response(status=200, body=f"ID: {id}")
 
 
-dbr = DatabaseRouter("/page/%s/", query(models.Page.id), foo)
+dbr = DatabaseRoute("/page/%s/", query(models.Page.id), foo)
 app.add(dbr)

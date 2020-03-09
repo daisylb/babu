@@ -1,11 +1,12 @@
 import typing as t
 from sqlalchemy import func
+from sqlalchemy.sql.expression import FromClause
 from sqlalchemy.orm.query import Query
 from sqlalchemy.orm.session import Session
 from .response import Response
 
 
-class Router(t.Protocol):
+class Route(t.Protocol):
     def resolve(self, session: Session, url: str) -> t.Optional[Response]:
         ...
 
@@ -13,8 +14,8 @@ class Router(t.Protocol):
         ...
 
 
-class NestingRouter:
-    children: t.List[Router]
+class Router(Route):
+    children: t.List[Route]
 
     def __init__(self, prefix=""):
         self.prefix = prefix
@@ -35,11 +36,11 @@ class NestingRouter:
             for url, content in child.get_all(session):
                 yield self.prefix + url, content
 
-    def add(self, router: Router):
+    def add(self, router: Route):
         self.children.append(router)
 
 
-class DatabaseRouter:
+class DatabaseRoute(Route):
     def __init__(
         self, format_string, query: Query, callable: t.Callable[..., Response]
     ):
@@ -69,3 +70,15 @@ class DatabaseRouter:
 
 
 query = Query
+
+
+class RouteQuery(Query):
+    __url_pattern: str
+    __param_map: t.Mapping[str, FromClause]
+    def __init__(self, url_pattern: str, **params: t.Mapping[str, FromClause]):
+        super().__init__(*params.values())
+        self.__url_pattern = url_pattern
+        self.__param_map = params
+
+    def __call__(self, callable: t.Callable[..., Response]):
+        pass
