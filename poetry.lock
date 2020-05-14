@@ -36,7 +36,7 @@ description = "a modern parsing library"
 name = "lark-parser"
 optional = false
 python-versions = "*"
-version = "0.8.1"
+version = "0.8.5"
 
 [[package]]
 category = "dev"
@@ -173,7 +173,8 @@ colorama = [
     {file = "colorama-0.4.1.tar.gz", hash = "sha256:05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d"},
 ]
 lark-parser = [
-    {file = "lark-parser-0.8.1.tar.gz", hash = "sha256:b9f4e4711b0837d682051009d232e6df6b37a1278db4568a8221124bb8c1dc8a"},
+    {file = "lark-parser-0.8.5.tar.gz", hash = "sha256:e3ee17708e310de3a832a9beb448aa60ab6812f1bb283f72d473584c7566cc74"},
+    {file = "lark_parser-0.8.5-py2.py3-none-any.whl", hash = "sha256:157879e04628e8e2bd57b72f3ba5642b3919137d5f7058612e95a38fb8761fa7"},
 ]
 more-itertools = [
     {file = "more-itertools-8.0.0.tar.gz", hash = "sha256:53ff73f186307d9c8ef17a9600309154a6ae27f25579e80af4db8f047ba14bc2"},
