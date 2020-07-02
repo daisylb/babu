@@ -36,7 +36,10 @@ description = "a modern parsing library"
 name = "lark-parser"
 optional = false
 python-versions = "*"
-version = "0.8.5"
+version = "0.9.0"
+
+[package.extras]
+regex = ["regex"]
 
 [[package]]
 category = "dev"
@@ -156,7 +159,7 @@ python-versions = "*"
 version = "0.1.7"
 
 [metadata]
-content-hash = "f95206acc60ba90387b1da29d19c3a534d120d0bafd67960d038ff4d6cc3ffd5"
+content-hash = "b94babd8a314790c855216e04b6fa37b5d1b42056de45e0f14db37c553c77a87"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -173,8 +176,7 @@ colorama = [
     {file = "colorama-0.4.1.tar.gz", hash = "sha256:05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d"},
 ]
 lark-parser = [
-    {file = "lark-parser-0.8.5.tar.gz", hash = "sha256:e3ee17708e310de3a832a9beb448aa60ab6812f1bb283f72d473584c7566cc74"},
-    {file = "lark_parser-0.8.5-py2.py3-none-any.whl", hash = "sha256:157879e04628e8e2bd57b72f3ba5642b3919137d5f7058612e95a38fb8761fa7"},
+    {file = "lark-parser-0.9.0.tar.gz", hash = "sha256:9e7589365d6b6de1cca40b0eaec31104a3fb96a37a11a9dfd5098e95b50aa6cd"},
 ]
 more-itertools = [
     {file = "more-itertools-8.0.0.tar.gz", hash = "sha256:53ff73f186307d9c8ef17a9600309154a6ae27f25579e80af4db8f047ba14bc2"},
