@@ -42,9 +42,8 @@ class Router(Route):
 
 class DatabaseRoute(Route):
     def __init__(
-        self, format_string, query: Query, callable: t.Callable[..., Response]
+        self, query: RouteQuery, callable: t.Callable[..., Response]
     ):
-        self.format_string = format_string
         self.query = query
         self.callable = callable
         self.url_entity = func.printf(
@@ -73,12 +72,13 @@ query = Query
 
 
 class RouteQuery(Query):
-    __url_pattern: str
-    __param_map: t.Mapping[str, FromClause]
+    url_pattern: str
+    parameter_map: t.Mapping[str, FromClause]
+
     def __init__(self, url_pattern: str, **params: t.Mapping[str, FromClause]):
         super().__init__(*params.values())
-        self.__url_pattern = url_pattern
-        self.__param_map = params
+        self.url_pattern = url_pattern
+        self.parameter_map = params
 
     def __call__(self, callable: t.Callable[..., Response]):
         pass
