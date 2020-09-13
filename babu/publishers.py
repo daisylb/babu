@@ -1,12 +1,14 @@
 import typing as t
-from .response import Response
-from pathlib import Path, PurePosixPath
-import attr
-from shutil import rmtree, copyfileobj
 from io import TextIOWrapper
+from pathlib import Path, PurePosixPath
+from shutil import copyfileobj, rmtree
 
+import attr
+
+from .response import Response
 
 # ! Utility functions
+
 
 @attr.s
 class UnsupportedStatus(ValueError):

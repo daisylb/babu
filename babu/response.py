@@ -1,6 +1,7 @@
-import attr
-from http import HTTPStatus
 import typing as t
+from http import HTTPStatus
+
+import attr
 
 
 @attr.s

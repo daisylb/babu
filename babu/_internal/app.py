@@ -1,10 +1,13 @@
-from importlib import import_module, resources
 import typing as t
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
-from babu.db import Model
-from ruamel.yaml import YAML  # type: ignore
+from importlib import import_module, resources
+
 import click
+from ruamel.yaml import YAML  # type: ignore
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, sessionmaker
+
+from babu.db import Model
+
 from ..publishers import Publisher
 
 

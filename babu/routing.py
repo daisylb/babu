@@ -1,8 +1,10 @@
 import typing as t
+
 from sqlalchemy import func
-from sqlalchemy.sql.expression import FromClause
 from sqlalchemy.orm.query import Query
 from sqlalchemy.orm.session import Session
+from sqlalchemy.sql.expression import FromClause
+
 from .response import Response
 
 

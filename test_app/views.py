@@ -1,12 +1,12 @@
-from babu.routing import Router, DatabaseRoute, query
-from . import models
-from babu.response import Response
+from babu.routing import Router
 from babu.views import template
+
+from . import models
 
 app = Router()
 
 
 @app.db_view("/page/%s/", models.Page.id)
-@template('test.html')
+@template("test.html")
 def foo(id):
-    return {'blah': id}
+    return {"blah": id}
