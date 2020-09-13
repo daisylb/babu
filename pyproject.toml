@@ -15,13 +15,15 @@ sqlalchemy = "^1.3"
 lark-parser = ">=0.8.1,<0.10.0"
 attrs = "^19.3.0"
 click = "^7.0"
+jinja2 = "^2.11.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4"
+
+[tool.black]
+target-version = ['py38']
 
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
-[tool.black]
-target-version = ['py38']
