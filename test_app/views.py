@@ -5,9 +5,6 @@ from babu.response import Response
 app = Router()
 
 
+@app.db_view("/page/%s/", models.Page.id)
 def foo(id):
     return Response(status=200, body=f"ID: {id}")
-
-
-dbr = DatabaseRoute("/page/%s/", query(models.Page.id), foo)
-app.add(dbr)

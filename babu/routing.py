@@ -39,11 +39,36 @@ class Router(Route):
     def add(self, router: Route):
         self.children.append(router)
 
+    def db_view(self, url_pattern: str, *params: FromClause) -> "QueryDecorator":
+        def on_decorate(query, view_func):
+            self.add(DatabaseRoute(url_pattern, query, view_func))
+
+        decorator = QueryDecorator(on_decorate, *params)
+        return decorator
+
+
+class QueryDecorator(Query):
+    on_decorate: t.Callable
+
+    def __init__(
+        self,
+        on_decorate: t.Callable[["QueryDecorator", t.Callable], None],
+        *args,
+        **kwargs,
+    ):
+        self.on_decorate = on_decorate  # type: ignore
+        print(f"{args=}, {kwargs=}")
+        super().__init__(*args, **kwargs)
+
+    def __call__(
+        self, callable: t.Callable[..., Response]
+    ) -> t.Callable[..., Response]:
+        self.on_decorate(self, callable)
+        return callable
+
 
 class DatabaseRoute(Route):
-    def __init__(
-        self, query: RouteQuery, callable: t.Callable[..., Response]
-    ):
+    def __init__(self, format_string, query, callable: t.Callable[..., Response]):
         self.query = query
         self.callable = callable
         self.url_entity = func.printf(
@@ -69,16 +94,3 @@ class DatabaseRoute(Route):
 
 
 query = Query
-
-
-class RouteQuery(Query):
-    url_pattern: str
-    parameter_map: t.Mapping[str, FromClause]
-
-    def __init__(self, url_pattern: str, **params: t.Mapping[str, FromClause]):
-        super().__init__(*params.values())
-        self.url_pattern = url_pattern
-        self.parameter_map = params
-
-    def __call__(self, callable: t.Callable[..., Response]):
-        pass

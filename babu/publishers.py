@@ -6,6 +6,8 @@ from shutil import rmtree, copyfileobj
 from io import TextIOWrapper
 
 
+# ! Utility functions
+
 @attr.s
 class UnsupportedStatus(ValueError):
     path: str = attr.ib()
@@ -24,13 +26,16 @@ def write(content: t.Union[str, bytes, t.TextIO, t.BinaryIO], output: t.BinaryIO
         output.write(content)
     elif isinstance(content.read(0), str):
         copyfileobj(
-            t.cast(t.TextIO, content),
+            content,
             TextIOWrapper(output, encoding="utf8", newline=""),
-        )
+        )  # type: ignore
     elif isinstance(content.read(0), bytes):
-        copyfileobj(t.cast(t.BinaryIO, content), output)
+        copyfileobj(content, output)  # type: ignore
     else:
         raise TypeError(content)
+
+
+# ! Publishers
 
 
 class Directory(Publisher):
