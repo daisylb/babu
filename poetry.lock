@@ -58,9 +58,10 @@ description = "a modern parsing library"
 name = "lark-parser"
 optional = false
 python-versions = "*"
-version = "0.9.0"
+version = "0.10.0"
 
 [package.extras]
+nearley = ["js2py"]
 regex = ["regex"]
 
 [[package]]
@@ -203,7 +204,7 @@ python-versions = "*"
 version = "0.2.5"
 
 [metadata]
-content-hash = "26be68c2db537f93fbda746c6ebe3bce8d216455c73faf05e8b5a04138a0cfb7"
+content-hash = "14a5fbc98a515493483a3b7ba4f59ba985e7f5b849a02ad8e30aa112f2a04574"
 lock-version = "1.0"
 python-versions = ">=3.8"
 
@@ -229,7 +230,7 @@ jinja2 = [
     {file = "Jinja2-2.11.2.tar.gz", hash = "sha256:89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"},
 ]
 lark-parser = [
-    {file = "lark-parser-0.9.0.tar.gz", hash = "sha256:9e7589365d6b6de1cca40b0eaec31104a3fb96a37a11a9dfd5098e95b50aa6cd"},
+    {file = "lark_parser-0.10.0-py2.py3-none-any.whl", hash = "sha256:f7044d3a4ad42c07e853da590727d5f1e5f9c36e5795bdeb05227fe0bace2344"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
