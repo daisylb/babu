@@ -1,5 +1,5 @@
 import typing as t
-from importlib import import_module, resources
+from importlib import import_module
 
 import click
 from ruamel.yaml import YAML  # type: ignore
@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from babu.db import Model
 
 from ..publishers import Publisher
+from .data_loader import load_path
 
 
 @click.command()
@@ -21,7 +22,7 @@ def main(import_path):
     load_models(import_path)
     Session = create_db()
     session = Session()
-    load_data(session, import_path)
+    load_path(session, import_path)
     iterbl = build_site(session, import_path)
     publisher = load_publisher(import_path)
     publisher(iterbl)
@@ -38,43 +39,6 @@ def create_db() -> t.Callable[[], Session]:
     Model.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     return Session
-
-
-yaml = YAML(typ="safe")
-
-
-def load_data(session: Session, import_path: str, *, prefix=()):
-    data_path = ".".join((import_path, "data", *prefix))
-    for entry in resources.contents(data_path):
-        if entry in ("__init__.py", "__pycache__"):
-            continue
-        if resources.is_resource(data_path, entry):
-            # This is a resource (ie a file)
-            t = resources.read_text(data_path, entry)
-            load_file(session, prefix, entry, t)
-        else:
-            # This is a directory (so recurse into it)
-            load_data(session, import_path, prefix=(*prefix, entry))
-
-
-def load_file(session: Session, prefix: t.Sequence[str], fullname: str, content: str):
-    name, ext = fullname.split(".", 1)
-    data = deserialize_file(ext, content)
-    cls = Model._decl_class_registry[data["_type"]]  # type: ignore
-    inst = cls()
-    inst.id = ".".join((*prefix, name))
-    for k, v in data.items():
-        if k == "_type":
-            continue
-        setattr(inst, k, v)
-    session.add(inst)
-    session.commit()
-
-
-def deserialize_file(ext: str, content: str) -> dict:
-    if ext in ("yml", "yaml"):
-        return yaml.load(content)
-    raise ValueError(ext)
 
 
 def build_site(session: Session, import_path: str):
