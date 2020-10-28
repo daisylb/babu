@@ -2,11 +2,12 @@ import functools
 import typing as t
 
 import jinja2
+import mistletoe
 
 from .response import Response
 
 environment = jinja2.Environment(
-    loader=jinja2.PackageLoader("test_app", "templates"),
+    loader=jinja2.FileSystemLoader("leighbrenecki/templates/"),
     autoescape=jinja2.select_autoescape(("htm", "html", "xml")),
 )
 
@@ -23,3 +24,10 @@ def template(name: str) -> t.Callable[[t.Callable], t.Callable]:
         return wrapper
 
     return decorator
+
+
+def markdown(value):
+    return mistletoe.markdown(value)
+
+
+environment.filters["markdown"] = markdown
