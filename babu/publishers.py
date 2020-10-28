@@ -58,3 +58,16 @@ class Directory(Publisher):
             target_path.parent.mkdir(parents=True, exist_ok=True)
             with target_path.open("wb") as f:
                 write(response.body, f)
+
+
+class InMemory(Publisher):
+    pages: t.Mapping[str, Response]
+
+    def __init__(self):
+        self.pages = {}
+
+    def __call__(self, pages):
+        for path, response in pages:
+            if path in self.pages:
+                raise ValueError(f"{path!r} already exists")
+            self.pages[path] = response
