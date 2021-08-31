@@ -63,13 +63,15 @@ i18n = ["Babel (>=0.8)"]
 
 [[package]]
 name = "lark-parser"
-version = "0.9.0"
+version = "0.12.0"
 description = "a modern parsing library"
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.extras]
+atomic_cache = ["atomicwrites"]
+nearley = ["js2py"]
 regex = ["regex"]
 
 [[package]]
@@ -238,7 +240,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~=3.8"
-content-hash = "b7392df79de936bdcae309014b82f1625cf8de3a57cab772f18fe29b61348b7b"
+content-hash = "33dcd1c16d39ba78de46e80cbc2d793aca26d6b96131d0bfd5b5de033e12426b"
 
 [metadata.files]
 atomicwrites = [
@@ -307,7 +309,8 @@ jinja2 = [
     {file = "Jinja2-2.11.2.tar.gz", hash = "sha256:89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"},
 ]
 lark-parser = [
-    {file = "lark-parser-0.9.0.tar.gz", hash = "sha256:9e7589365d6b6de1cca40b0eaec31104a3fb96a37a11a9dfd5098e95b50aa6cd"},
+    {file = "lark-parser-0.12.0.tar.gz", hash = "sha256:15967db1f1214013dca65b1180745047b9be457d73da224fcda3d9dd4e96a138"},
+    {file = "lark_parser-0.12.0-py2.py3-none-any.whl", hash = "sha256:0eaf30cb5ba787fe404d73a7d6e61df97b21d5a63ac26c5008c78a494373c675"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
