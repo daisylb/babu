@@ -16,7 +16,7 @@ lark-parser = ">=0.8.1,<0.10.0"
 attrs = "^19.3.0"
 click = "^7.0"
 jinja2 = "^2.11.2"
-mistletoe = "^0.7.2"
+mistletoe = ">=0.7.2,<0.9.0"
 parse = "^1.18.0"
 
 [tool.poetry.dev-dependencies]
